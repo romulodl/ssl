@@ -31,7 +31,14 @@ class Ssl
 
             $sma_high = array_sum(array_slice($high, -1 * $period)) / $period;
             $sma_low = array_sum(array_slice($low, -1 * $period)) / $period;
-            $close = $val[2] > $sma_high ? 1 : $close < $sma_low ? -1 : $close;
+
+            if ($val[2] > $sma_high) {
+                $close = 1;
+            }
+
+            if ($val[2] < $sma_low) {
+                $close = -1;
+            }
         }
 
         return $close;
